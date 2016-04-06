@@ -12,7 +12,6 @@ var modifiedAPI = function(data,req,res) {
 		},
 		modifiedsearchMetaData:function(req){
 			if(builder.unbxd.hasOwnProperty("searchMetaData")){
-				//authKey =
 				var params = {};
 				var headers = {};
 				var i;
@@ -98,16 +97,6 @@ var modifiedAPI = function(data,req,res) {
 					temp["filter"] = escape(facetName + ":" + "[" + temp["start"] + " TO " + temp["end"] + "]");
 					modifiedRanges.push(temp);
 				}
-				/*
-				for(i = parseInt(values.start); i<= parseInt(values.end) ; i=i+parseInt(values.gap)){
-					temp = {}
-					temp["start"] = (i == 0) ? "*" : (parseFloat(i)+"");
-					temp["end"] = parseFloat((i+parseInt(values.gap))) + "";
-					console.log((parseFloat(i)+1)+".0",values["counts"])
-					temp["numDocs"] = values["counts"][values["counts"].indexOf(parseFloat(i)+"")+1];
-					temp["filter"] = escape(facetName + ":" + "[" + temp["start"] + " TO " + temp["end"] + "]");
-					modifiedRanges.push(temp);
-				}*/
 				return modifiedRanges;
 			}
 			var generateFacets = function(facetName,values){
@@ -153,7 +142,6 @@ var modifiedAPI = function(data,req,res) {
 					builder.modifyFacets();
 				}
 			}catch (err) {
-				console.log("inside catch modifyRes")
 				builder.error["message"] = err.toString();
 				builder.error["stack"] = err.stack
 			}
@@ -163,7 +151,6 @@ var modifiedAPI = function(data,req,res) {
 	if( builder.error.hasOwnProperty("message")){
 		return JSON.stringify(builder.error,null,4);
 	}else{
-		// console.log(JSON.stringify(builder.modifiedResult,null,4))
 		return JSON.stringify(builder.modifiedResult,null,4);
 	}
 };

@@ -3,8 +3,8 @@ var http = require('http');
 var absProxy = require('abs-proxy');
 var apiModifier = require('./clients/api-modifier.js');
 var proxy = absProxy.createAbsProxy({
-    host: 'search.unbxdapi.com',
-    port: 80
+    host: '127.0.0.1',
+    port: 8086
 });
 var server;
 
@@ -14,6 +14,6 @@ server = http.createServer(function(req, res) {
     proxy.dispatch(req, res);
 });
 
-var host = 'localhost';
-var port = '8080';
+var host = '127.0.0.1';
+var port = '6968';
 server.listen(port, host);
