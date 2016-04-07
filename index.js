@@ -8,12 +8,11 @@ var proxy = absProxy.createAbsProxy({
 });
 var server;
 
-proxy.onResponse(/\//,apiModifier);
+proxy.onResponse(/\/unbxd-search/, apiModifier);
 
 server = http.createServer(function(req, res) {
     proxy.dispatch(req, res);
 });
 
-var host = '127.0.0.1';
-var port = '6968';
-server.listen(port, host);
+var port = '8080';
+server.listen(port);
