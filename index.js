@@ -2,6 +2,7 @@
 var http = require('http');
 var absProxy = require('abs-proxy');
 var apiModifier = require('./clients/api-modifier.js');
+var reqModifier = require('./clients/reqModifier.js');
 var proxy = absProxy.createAbsProxy({
     host: '127.0.0.1',
     port: 8086
@@ -11,6 +12,7 @@ var server;
 proxy.onResponse(/\/unbxd-search/, apiModifier);
 
 server = http.createServer(function(req, res) {
+	reqModifier(req)
     proxy.dispatch(req, res);
 });
 
