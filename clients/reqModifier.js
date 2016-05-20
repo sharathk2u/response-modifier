@@ -10,23 +10,27 @@ var modifiedReq = function(req){
 	url = req.url;
 	params = typeof(url)!= "undefined" ? url.split("?")[1] : "";
 	path = typeof(url)!= "undefined" ? url.split("?")[0] : "";
-	console.log(params);
-	temp = typeof(params)!= "undefined" ? params.split("&") : paramTemp;
-	for(i in temp){
-		param[temp[i].split("=")[0]] = temp[i].split("=")[1]
-	}
-	if(param.hasOwnProperty("page")){
-		var tem;
-		tem = param["page"]
-		param["page"] = parseInt(tem) - 1 + ""
-	}
-	for(i in param){
-		if(param.hasOwnProperty(i)){
-			paramTemp.push(i+"="+param[i])
-		}
-	}
-	var appnd = (paramTemp.length >= 1) ? "?" : "";
-	req.url = path + appnd + paramTemp.join("&");
 
+	if(typeof(params) != "undefined" ){
+		if( params[0] == "&"){
+			params = params.substring(1);
+		}
+		temp = typeof(params)!= "undefined" ? params.split("&") : paramTemp;
+		for(i in temp){
+			param[temp[i].split("=")[0]] = temp[i].split("=")[1]
+		}
+		if(param.hasOwnProperty("page")){
+			var tem;
+			tem = param["page"]
+			param["page"] = parseInt(tem) - 1 + ""
+		}
+		for(i in param){
+			if(param.hasOwnProperty(i)){
+				paramTemp.push(i+"="+param[i])
+			}
+		}
+		var appnd = (paramTemp.length >= 1) ? "?" : "";
+		req.url = path + appnd + paramTemp.join("&");
+	}
 }
 module.exports = modifiedReq;
